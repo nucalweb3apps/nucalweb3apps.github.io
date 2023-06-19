@@ -63,10 +63,10 @@ curl --request POST 'https://public-gateway.ewr4.chain.nusec.com/auth/connect/wa
 Response:
 ```
 {
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoidXNlciIsIndhbGxldEFkZHJlc3MiOiIweDBhNTQwZDI5ZDEzNjllMWM4OGVhOGMzYzkwOTI5NWE0ODA1Y2MyNDgiLCJ0aW1lIjoxNjg3MTY0MzE5ODYyLCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTY4OTc1NjMxOX0.BxfgDhWo-cr-dw2aCJyO0UPIgTQScQukMeX3J4s3tYA",
-    "accessTokenExpiresAt": 1689756319,
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ0aW1lIjoxNjg3MTY0MzE5ODY3LCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTcxODI2ODMxOX0.Tbl58Yxo3MvAOCzGBkTKIdz9sJ93VRfiankdnsr0boo",
-    "refreshTokenExpiresAt": 1718268319
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoidXNlciIsIndhbGxldEFkZHJlc3MiOiIweDBhNTQwZDI5ZDEzNjllMWM4OGVhOGMzYzkwOTI5NWE0ODA1Y2MyNDgiLCJ0aW1lIjoxNjg3MTY0MzE5ODYyLCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTY4OTc1NjMxOX0.BxfgDhWo-cr-dw2aCJyO0UPIgTQScQukMeX3J4s3tYA",
+  "accessTokenExpiresAt": 1689756319,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ0aW1lIjoxNjg3MTY0MzE5ODY3LCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTcxODI2ODMxOX0.Tbl58Yxo3MvAOCzGBkTKIdz9sJ93VRfiankdnsr0boo",
+  "refreshTokenExpiresAt": 1718268319
 }
 ```
 
