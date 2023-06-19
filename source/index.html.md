@@ -17,48 +17,69 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Nucal API
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Nucal API! You can use our API to use Ethereum rpc's.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
 # Authentication
 
 > To authorize, use this code:
 
+
+> Make sure to replace `<your_wallet_address>` with your wallet address.
+
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+curl -request GET "https://public-gateway.ewr4.chain.nusec.com/auth/connect/wallet/<your_wallet_address>/nonce/"
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+Response will be like following:
+```shell
+{
+    "nonce": 6156349486544681,
+    "text": "Please sign this message, to connect. (6156349486544681)"
+}
+```
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+Sign the text in response with your wallet.
 
-`Authorization: meowmeowmeow`
+
+> Make sure to replace `<your_wallet_address>` with your wallet address.
+> Make sure to replace `<signature>` with the one you created with your wallet.
+
+```shell
+curl --request POST 'https://public-gateway.ewr4.chain.nusec.com/auth/connect/wallet/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "walletAddress": "<your_wallet_address>",
+  "signature": "<signature>"
+}'
+```
+
+Response:
+```
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoidXNlciIsIndhbGxldEFkZHJlc3MiOiIweDBhNTQwZDI5ZDEzNjllMWM4OGVhOGMzYzkwOTI5NWE0ODA1Y2MyNDgiLCJ0aW1lIjoxNjg3MTY0MzE5ODYyLCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTY4OTc1NjMxOX0.BxfgDhWo-cr-dw2aCJyO0UPIgTQScQukMeX3J4s3tYA",
+    "accessTokenExpiresAt": 1689756319,
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ0aW1lIjoxNjg3MTY0MzE5ODY3LCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTcxODI2ODMxOX0.Tbl58Yxo3MvAOCzGBkTKIdz9sJ93VRfiankdnsr0boo",
+    "refreshTokenExpiresAt": 1718268319
+}
+```
+
+Nucal uses token to allow access to the API. 
+
+Nucal expects for the token to be included in all API requests to the server in a header that looks like the following:
+
+`Authorization: Bearer <token<`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>token</code> with your access token.
 </aside>
 
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-| Parameter | Description                    |
-| --------- | ------------------------------ |
-| ID        | The ID of the kitten to delete |
 
 # Ethereum
 
@@ -67,12 +88,11 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 Returns a list of addresses owned by client.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
 ```
 
@@ -88,19 +108,16 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
 `None`
-
-<aside class="notice">
-You must replace <code>YOUR-API-KEY</code> with your personal API key.
-</aside>
 
 ### Returns
 
@@ -116,9 +133,10 @@ Returns the number of most recent block.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
 ```
 
@@ -134,11 +152,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -159,9 +178,10 @@ Returns the balance of the account of given address.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getBalance",
@@ -185,11 +205,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -207,9 +228,10 @@ Executes a new message call immediately without creating a transaction on the bl
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_call",
@@ -237,11 +259,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -274,9 +297,10 @@ Returns the current Ethereum protocol version.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_protocolVersion","params":[],"id":1}'
 ```
 
@@ -292,11 +316,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -314,9 +339,10 @@ Returns the currently configured chain id, a value used in replay-protected tran
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
 ```
 
@@ -332,11 +358,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -359,9 +386,10 @@ To prevent abuse of the API, the gas parameter to eth_estimateGas and eth_call a
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_estimateGas",
@@ -390,11 +418,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -427,9 +456,10 @@ Returns historical gas information, allowing you to track trends over time.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_feeHistory",
@@ -471,11 +501,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -509,9 +540,10 @@ Returns the current gas price in wei.(the current price per gas in wei)
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":1}'
 ```
 
@@ -527,11 +559,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -549,9 +582,10 @@ Returns information about a block by hash.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getBlockByHash",
@@ -598,11 +632,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -663,9 +698,10 @@ Returns information about a block by block number.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getBlockByNumber",
@@ -707,11 +743,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -772,9 +809,10 @@ Returns the number of transactions in a block from a block matching the given bl
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getBlockTransactionCountByHash",
@@ -795,11 +833,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -819,9 +858,10 @@ Returns the number of transactions in a block matching the given block number.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getBlockTransactionCountByHash",
@@ -842,11 +882,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -866,9 +907,10 @@ Returns the compiled smart contract code, if any, at a given address.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getCode",
@@ -889,11 +931,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -914,9 +957,10 @@ Returns an array of all logs matching a given filter object.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getLogs",
@@ -948,11 +992,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -998,9 +1043,10 @@ Returns the account and storage values of the specified account, including the M
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getProof",
@@ -1040,11 +1086,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1080,9 +1127,10 @@ Returns information about a transaction by block hash and transaction index posi
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getTransactionByBlockHashAndIndex",
@@ -1119,11 +1167,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1172,9 +1221,10 @@ Returns information about a transaction by block number and transaction index po
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getTransactionByBlockNumberAndIndex",
@@ -1210,11 +1260,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1235,9 +1286,10 @@ Returns the information about a transaction requested by transaction hash.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getTransactionByHash",
@@ -1272,11 +1324,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1324,9 +1377,10 @@ Returns the number of transactions sent from an address.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getTransactionCount",
@@ -1347,11 +1401,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1376,9 +1431,10 @@ Note that the receipt is not available for pending transactions.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getTransactionReceipt",
@@ -1428,11 +1484,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1482,9 +1539,10 @@ Returns true if client is actively mining new blocks.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":1}'
 ```
 
@@ -1500,11 +1558,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1522,9 +1581,10 @@ Returns the number of hashes per second that the node is mining with. Only appli
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{"jsonrpc":"2.0","method":"eth_hashrate","params":[],"id":1}'
 ```
 
@@ -1540,11 +1600,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1562,9 +1623,10 @@ Creates new message call transaction or a contract creation for signed transacti
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_sendRawTransaction",
@@ -1585,11 +1647,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1619,9 +1682,10 @@ the address to sign with must be unlocked.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_sign",
@@ -1642,11 +1706,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1675,9 +1740,10 @@ Returns an object with data about the sync status or false.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_syncing",
@@ -1698,11 +1764,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1722,9 +1789,10 @@ Used for submitting a proof-of-work solution.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_syncing",
@@ -1749,11 +1817,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1777,9 +1846,10 @@ Polling method for a filter, which returns an array of logs which occurred since
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_syncing",
@@ -1813,11 +1883,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1855,9 +1926,10 @@ Returns an array of all logs matching filter with given id.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getFilterLogs",
@@ -1891,11 +1963,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 
@@ -1917,9 +1990,10 @@ Returns an array of all logs matching a given filter object.
 ## JSON-RPC over HTTPS POST
 ## You can also replace mainnet with a different supported network
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
     -X POST \
     -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <token> \
     -d '{
           "jsonrpc":"2.0",
           "method":"eth_getFilterLogs",
@@ -1955,11 +2029,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY \
 
 ### Request
 
-`POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY`
+`POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
 
 `Content-Type: application/json`
+`Authorization: Bearer <token>`
 
 ### Parameters
 

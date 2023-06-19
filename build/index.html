@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta
             name="description"
-            content="Documentation for the Kittn API"
+            content="Documentation for the Nucal API"
         >
     <link href="images/favicon-11871f3c.ico" rel="icon" type="image/ico" />
     <title>API Reference</title>
@@ -318,14 +318,6 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
-                  </li>
-                  <li>
-                    <a href="#url-parameters" class="toc-h2 toc-link" data-title="URL Parameters">URL Parameters</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#ethereum" class="toc-h1 toc-link" data-title="Ethereum">Ethereum</a>
@@ -432,56 +424,64 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<p>Welcome to the Nucal API! You can use our API to use Ethereum rpc&#39;s.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
+
+<p>Make sure to replace <code>&lt;your_wallet_address&gt;</code> with your wallet address.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://public-gateway.ewr4.chain.nusec.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
 </code></pre></div>
+<p>Response will be like following:
+<code>shell
+{
+    &quot;nonce&quot;: 6156349486544681,
+    &quot;text&quot;: &quot;Please sign this message, to connect. (6156349486544681)&quot;
+}
+</code></p>
+
+<p>Sign the text in response with your wallet.</p>
+
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code>&lt;your_wallet_address&gt;</code> with your wallet address.
+Make sure to replace <code>&lt;signature&gt;</code> with the one you created with your wallet.</p>
 </blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="s1">'https://public-gateway.ewr4.chain.nusec.com/auth/connect/wallet/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+  "walletAddress": "&lt;your_wallet_address&gt;",
+  "signature": "&lt;signature&gt;"
+}'</span>
+</code></pre></div>
+<p>Response:
+<code>
+{
+    &quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoidXNlciIsIndhbGxldEFkZHJlc3MiOiIweDBhNTQwZDI5ZDEzNjllMWM4OGVhOGMzYzkwOTI5NWE0ODA1Y2MyNDgiLCJ0aW1lIjoxNjg3MTY0MzE5ODYyLCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTY4OTc1NjMxOX0.BxfgDhWo-cr-dw2aCJyO0UPIgTQScQukMeX3J4s3tYA&quot;,
+    &quot;accessTokenExpiresAt&quot;: 1689756319,
+    &quot;refreshToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ0aW1lIjoxNjg3MTY0MzE5ODY3LCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTcxODI2ODMxOX0.Tbl58Yxo3MvAOCzGBkTKIdz9sJ93VRfiankdnsr0boo&quot;,
+    &quot;refreshTokenExpiresAt&quot;: 1718268319
+}
+</code></p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Nucal uses token to allow access to the API. </p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Nucal expects for the token to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>Authorization: Bearer &lt;token&lt;</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>token</code> with your access token.
 </aside>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
 <h1 id='ethereum'>Ethereum</h1><h2 id='eth_accounts'>eth_accounts</h2>
 <p>Returns a list of addresses owned by client.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_accounts<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -491,15 +491,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters'>Parameters</h3>
 <p><code>None</code></p>
-
-<aside class="notice">
-You must replace <code>YOUR-API-KEY</code> with your personal API key.
-</aside>
 <h3 id='returns'>Returns</h3>
 <p><code>Array of DATA - addresses owned by the client</code></p>
 <h2 id='eth_blocknumber'>eth_blockNumber</h2>
@@ -509,11 +506,12 @@ You must replace <code>YOUR-API-KEY</code> with your personal API key.
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_blockNumber<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -523,9 +521,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10307C9"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-2'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-2'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-2'>Parameters</h3>
 <table><thead>
 <tr>
@@ -549,19 +548,20 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getBalance",
-          "params":[
-            "0x9d9EAC372D333E1c391a96DEc802ed4faa946D91",
-            "latest"
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getBalance<span class="s2">",
+          "</span>params<span class="s2">":[
+            "</span>0x9d9EAC372D333E1c391a96DEc802ed4faa946D91<span class="s2">",
+            "</span>latest<span class="s2">"
           ],
-          "id":1
-        }'</span>
-</code></pre></div>
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -571,9 +571,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0234c8a3397aab58"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-3'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-3'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-3'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-3'>Returns</h3>
@@ -583,23 +584,24 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_call",
-          "params":[
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_call<span class="s2">",
+          "</span>params<span class="s2">":[
               {
-                "from": null,
-                "to": "0x9d9EAC372D333E1c391a96DEc802ed4faa946D91",
-                "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"
+                "</span>from<span class="s2">": null,
+                "</span>to<span class="s2">": "</span>0x9d9EAC372D333E1c391a96DEc802ed4faa946D91<span class="s2">",
+                "</span>data<span class="s2">": "</span>0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE<span class="s2">"
               },
-              "latest"
+              "</span>latest<span class="s2">"
           ]
-          "id":1
-        }'</span>
-</code></pre></div>
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -609,9 +611,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-4'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-4'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-4'>Parameters</h3>
 <ol>
 <li><code>Object</code> - The transaction call object.</li>
@@ -670,11 +673,12 @@ eth_call consumes `zero gas`, but this parameter may be needed by some execution
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_protocolVersion","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_protocolVersion<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -684,9 +688,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-5'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-5'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-5'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-5'>Returns</h3>
@@ -696,11 +701,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_chainId<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -710,9 +716,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-6'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-6'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-6'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-6'>Returns</h3>
@@ -727,24 +734,25 @@ To prevent abuse of the API, the gas parameter to eth_estimateGas and eth_call a
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_estimateGas",
-          "params":
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_estimateGas<span class="s2">",
+          "</span>params<span class="s2">":
               [{
-                "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155,
-                "to": "0x9d9EAC372D333E1c391a96DEc802ed4faa946D91",
-                "gas": "0x76c0",
-                "gasPrice": "0x9184e72a000",
-                "value": "0x9184e72a"
-                "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"
-              }]
-          "id":1
-        }'</span>
-</code></pre></div>
+                "</span>from<span class="s2">": "</span>0xb60e8dd61c5d32be8058bb8eb970870f07233155,
+                <span class="s2">"to"</span>: <span class="s2">"0x9d9EAC372D333E1c391a96DEc802ed4faa946D91"</span>,
+                <span class="s2">"gas"</span>: <span class="s2">"0x76c0"</span>,
+                <span class="s2">"gasPrice"</span>: <span class="s2">"0x9184e72a000"</span>,
+                <span class="s2">"value"</span>: <span class="s2">"0x9184e72a"</span>
+                <span class="s2">"data"</span>: <span class="s2">"0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"</span>
+              <span class="o">}]</span>
+          <span class="s2">"id"</span>:1
+        <span class="o">}</span><span class="s1">'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -754,9 +762,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x5cec"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-7'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-7'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-7'>Parameters</h3>
 <p><code>Object</code> - The transaction call object.</p>
 
@@ -819,16 +828,17 @@ eth_estimateGas consumes `zero gas`, but this parameter may be needed by some ex
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_feeHistory",
-          "params":[4, "latest", [25, 75]],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_feeHistory<span class="s2">",
+          "</span>params<span class="s2">":[4, "</span>latest<span class="s2">", [25, 75]],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -859,9 +869,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-8'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-8'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-8'>Parameters</h3>
 <p><code>Object</code> - The transaction call object.</p>
 
@@ -905,11 +916,12 @@ blockCount -> If blocks in the specified block range are not available, then onl
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_gasPrice<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -919,9 +931,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1dfd13ffe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-9'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-9'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-9'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-9'>Returns</h3>
@@ -931,16 +944,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getBlockByHash",
-          "params": ["0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35",false],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getBlockByHash<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35<span class="s2">",false],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -976,9 +990,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-10'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-10'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-10'>Parameters</h3>
 <p><code>Object</code> - The transaction call object.</p>
 
@@ -1043,16 +1058,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getBlockByNumber",
-          "params": ["0x1b4", true],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getBlockByNumber<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0x1b4<span class="s2">", true],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1083,9 +1099,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-11'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-11'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-11'>Parameters</h3>
 <p><code>Object</code> - The transaction call object.</p>
 
@@ -1147,16 +1164,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getBlockTransactionCountByHash",
-          "params":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getBlockTransactionCountByHash<span class="s2">",
+          "</span>params<span class="s2">":["</span>0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1166,9 +1184,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xb"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="mi">11</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-12'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-12'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-12'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1188,16 +1207,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getBlockTransactionCountByHash",
-          "params":["0xe8"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getBlockTransactionCountByHash<span class="s2">",
+          "</span>params<span class="s2">":["</span>0xe8<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1207,9 +1227,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xa"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-13'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-13'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-13'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1229,16 +1250,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getCode",
-          "params":["0x06012c8cf97bead5deae237070f9587f8e7a266d", "0x65a8db"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getCode<span class="s2">",
+          "</span>params<span class="s2">":["</span>0x06012c8cf97bead5deae237070f9587f8e7a266d<span class="s2">", "</span>0x65a8db<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1248,9 +1270,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x6001600080..."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-14'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-14'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-14'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1274,16 +1297,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getLogs",
-          "params":[{"topics":["0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b"]}]
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getLogs<span class="s2">",
+          "</span>params<span class="s2">":[{"</span>topics<span class="s2">":["</span>0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b<span class="s2">"]}]
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1304,9 +1328,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-15'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-15'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-15'>Parameters</h3>
 <p><code>Object</code> - The filter options.</p>
 
@@ -1372,16 +1397,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getProof",
-          "params":["0x7F0d15C7FAae65896648C8273B6d7E43f58Fa842", ["0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"], "latest"]
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getProof<span class="s2">",
+          "</span>params<span class="s2">":["</span>0x7F0d15C7FAae65896648C8273B6d7E43f58Fa842<span class="s2">", ["</span>0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421<span class="s2">"], "</span>latest<span class="s2">"]
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1410,9 +1436,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-16'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-16'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-16'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1456,16 +1483,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getTransactionByBlockHashAndIndex",
-          "params": ["0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35","0x0"]
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getTransactionByBlockHashAndIndex<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35<span class="s2">","</span>0x0<span class="s2">"]
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1491,9 +1519,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-17'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-17'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-17'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1534,16 +1563,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getTransactionByBlockNumberAndIndex",
-          params: [ "0x29c", "0x0" ],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getTransactionByBlockNumberAndIndex<span class="s2">",
+          params: [ "</span>0x29c<span class="s2">", "</span>0x0<span class="s2">" ],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1568,9 +1598,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-18'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-18'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-18'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1594,16 +1625,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getTransactionByHash",
-          "params": ["0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getTransactionByHash<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1627,9 +1659,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
     </span><span class="nl">"s"</span><span class="p">:</span><span class="s2">"0x4ba69724e8f69de52f0125ad8b3c5c2cef33019bac3249e2c0a2192766d1721c"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-19'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-19'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-19'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1666,16 +1699,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getTransactionCount",
-          "params":["0xc94770007dda54cF92009BFF0dE90c06F603a09f","0x5bad55"]
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getTransactionCount<span class="s2">",
+          "</span>params<span class="s2">":["</span>0xc94770007dda54cF92009BFF0dE90c06F603a09f<span class="s2">","</span>0x5bad55<span class="s2">"]
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1685,9 +1719,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1a"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-20'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-20'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-20'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1715,16 +1750,17 @@ Note that the receipt is not available for pending transactions.
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getTransactionReceipt",
-          "params": ["0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getTransactionReceipt<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1763,9 +1799,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-21'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-21'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-21'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1803,11 +1840,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_mining<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1817,9 +1855,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-22'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-22'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-22'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-22'>Returns</h3>
@@ -1829,11 +1868,12 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{"jsonrpc":"2.0","method":"eth_hashrate","params":[],"id":1}'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{"</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">","</span>method<span class="s2">":"</span>eth_hashrate<span class="s2">","</span>params<span class="s2">":[],"</span><span class="nb">id</span><span class="s2">":1}'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1843,9 +1883,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-23'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-23'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-23'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-23'>Returns</h3>
@@ -1855,16 +1896,17 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_sendRawTransaction",
-          "params": ["0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_sendRawTransaction<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1874,9 +1916,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-24'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-24'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-24'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1906,16 +1949,17 @@ the address to sign with must be unlocked.
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_sign",
-          "params": ["0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_sign<span class="s2">",
+          "</span>params<span class="s2">": ["</span>0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833<span class="s2">"],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1925,9 +1969,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-25'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-25'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-25'>Parameters</h3>
 <table><thead>
 <tr>
@@ -1957,16 +2002,17 @@ The eth_sendTransaction JSON-RPC method is not supported because Infura doesn't 
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_syncing",
-          "params":[],
-          "id":1
-        }'</span>
-</code></pre></div>
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_syncing<span class="s2">",
+          "</span>params<span class="s2">":[],
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -1976,9 +2022,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-26'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-26'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-26'>Parameters</h3>
 <p><code>None</code></p>
 <h3 id='returns-26'>Returns</h3>
@@ -1990,20 +2037,21 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_syncing",
-          "params": [
-            "0x0000000000000001",
-            "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-            "0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000",
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_syncing<span class="s2">",
+          "</span>params<span class="s2">": [
+            "</span>0x0000000000000001<span class="s2">",
+            "</span>0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef<span class="s2">",
+            "</span>0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000<span class="s2">",
           ],
-          "id":1
-        }'</span>
-</code></pre></div>
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -2013,9 +2061,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-27'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-27'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-27'>Parameters</h3>
 <p><code>WORK ARRAY</code></p>
 
@@ -2045,18 +2094,19 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_syncing",
-          "params": [
-            "0x16", // 22
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_syncing<span class="s2">",
+          "</span>params<span class="s2">": [
+            "</span>0x16<span class="s2">", // 22
           ],
-          "id":1
-        }'</span>
-</code></pre></div>
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -2077,9 +2127,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-28'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-28'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-28'>Parameters</h3>
 <p><code>WORK ARRAY</code></p>
 
@@ -2121,18 +2172,19 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getFilterLogs",
-          "params": [
-            "0x16", // 22
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getFilterLogs<span class="s2">",
+          "</span>params<span class="s2">": [
+            "</span>0x16<span class="s2">", // 22
           ],
-          "id":1
-        }'</span>
-</code></pre></div>
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -2153,9 +2205,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-29'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-29'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-29'>Parameters</h3>
 <p><code>WORK ARRAY</code></p>
 
@@ -2177,20 +2230,21 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
+curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{
-          "jsonrpc":"2.0",
-          "method":"eth_getFilterLogs",
+    <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
+    -d '{
+          "</span>jsonrpc<span class="s2">":"</span>2.0<span class="s2">",
+          "</span>method<span class="s2">":"</span>eth_getFilterLogs<span class="s2">",
           params: [{
             topics: [
-              "0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b",
+              "</span>0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b<span class="s2">",
             ],
           }]
-          "id":1
-        }'</span>
-</code></pre></div>
+          "</span><span class="nb">id</span><span class="s2">":1
+        }'
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
@@ -2211,9 +2265,10 @@ curl https://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY <span class="se">\</span>
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-30'>Request</h3>
-<p><code>POST http://geth.ewr4.chain.nusec.com/v1/YOUR-API-KEY</code></p>
+<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
 <h3 id='headers-30'>Headers</h3>
-<p><code>Content-Type: application/json</code></p>
+<p><code>Content-Type: application/json</code>
+<code>Authorization: Bearer &lt;token&gt;</code></p>
 <h3 id='parameters-30'>Parameters</h3>
 <p><code>WORK ARRAY</code></p>
 
