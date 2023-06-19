@@ -157,7 +157,6 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 
 ### Headers
 
-
 `Content-Type: application/json`
 
 `Authorization: Bearer <token>`
@@ -211,7 +210,6 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 `POST https://public-gateway.ewr4.chain.nusec.com/ethereum`
 
 ### Headers
-
 
 `Content-Type: application/json`
 
@@ -269,6 +267,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -326,6 +325,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -368,6 +368,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -428,6 +429,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -511,6 +513,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -569,6 +572,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -642,6 +646,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -753,6 +758,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -843,6 +849,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -892,6 +899,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -941,6 +949,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1002,6 +1011,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1096,6 +1106,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1177,6 +1188,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1270,6 +1282,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1334,6 +1347,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1411,6 +1425,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1494,6 +1509,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1568,6 +1584,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1610,6 +1627,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1657,6 +1675,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1716,6 +1735,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1774,6 +1794,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1827,6 +1848,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1893,6 +1915,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -1973,6 +1996,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
@@ -2039,6 +2063,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum \
 ### Headers
 
 `Content-Type: application/json`
+
 `Authorization: Bearer <token>`
 
 ### Parameters
