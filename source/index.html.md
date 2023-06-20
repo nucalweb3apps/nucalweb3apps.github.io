@@ -32,12 +32,13 @@ Welcome to the Nucal API! You can use our API to use Ethereum rpc's.
 
 > Make sure to replace `<your_wallet_address>` with your wallet address.
 
-```shell
+```sh
 curl -request GET "https://api.web3.nucal.com/auth/connect/wallet/<your_wallet_address>/nonce/"
 ```
 
 Response will be like following:
-```shell
+
+```sh
 {
     "nonce": 6156349486544681,
     "text": "Please sign this message, to connect. (6156349486544681)"
@@ -61,12 +62,13 @@ curl --request POST 'https://api.web3.nucal.com/auth/connect/wallet/' \
 ```
 
 Response:
+
 ```
 {
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoidXNlciIsIndhbGxldEFkZHJlc3MiOiIweDBhNTQwZDI5ZDEzNjllMWM4OGVhOGMzYzkwOTI5NWE0ODA1Y2MyNDgiLCJ0aW1lIjoxNjg3MTY0MzE5ODYyLCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTY4OTc1NjMxOX0.BxfgDhWo-cr-dw2aCJyO0UPIgTQScQukMeX3J4s3tYA",
-  "accessTokenExpiresAt": 1689756319,
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ0aW1lIjoxNjg3MTY0MzE5ODY3LCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTcxODI2ODMxOX0.Tbl58Yxo3MvAOCzGBkTKIdz9sJ93VRfiankdnsr0boo",
-  "refreshTokenExpiresAt": 1718268319
+  "accessToken": "<your_access_token>",
+  "accessTokenExpiresAt": <access_token_expiration_time>,
+  "refreshToken": "<your_refresh_token>",
+  "refreshTokenExpiresAt": <refresh_token_expiration_time>
 }
 ```
 
@@ -131,8 +133,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the number of most recent block.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -177,8 +177,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the balance of the account of given address.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -228,8 +227,6 @@ curl https://api.web3.nucal.com/ethereum \
 Executes a new message call immediately without creating a transaction on the block chain.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -298,8 +295,7 @@ eth_call consumes `zero gas`, but this parameter may be needed by some execution
 Returns the current Ethereum protocol version.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -341,8 +337,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the currently configured chain id, a value used in replay-protected transaction signing as introduced by EIP-155.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -389,8 +383,6 @@ To prevent abuse of the API, the gas parameter to eth_estimateGas and eth_call a
 </aside>
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -460,8 +452,6 @@ eth_estimateGas consumes `zero gas`, but this parameter may be needed by some ex
 Returns historical gas information, allowing you to track trends over time.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -545,8 +535,6 @@ blockCount -> If blocks in the specified block range are not available, then onl
 Returns the current gas price in wei.(the current price per gas in wei)
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -588,8 +576,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns information about a block by hash.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -705,8 +691,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns information about a block by block number.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -817,8 +801,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the number of transactions in a block from a block matching the given block hash.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -867,8 +849,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the number of transactions in a block matching the given block number.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -917,8 +897,6 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the compiled smart contract code, if any, at a given address.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -968,8 +946,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns an array of all logs matching a given filter object.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1055,8 +1032,7 @@ LOG OBJECTS - An array of log objects, or an empty array if nothing has changed 
 Returns the account and storage values of the specified account, including the Merkle proof.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1140,8 +1116,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns information about a transaction by block hash and transaction index position.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1235,8 +1210,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns information about a transaction by block number and transaction index position.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1301,8 +1275,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the information about a transaction requested by transaction hash.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1393,8 +1366,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the number of transactions sent from an address.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1448,8 +1420,7 @@ Note that the receipt is not available for pending transactions.
 </aside>
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1557,8 +1528,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns true if client is actively mining new blocks.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1600,8 +1570,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns the number of hashes per second that the node is mining with. Only applicable when the node is mining.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1643,8 +1612,7 @@ curl https://api.web3.nucal.com/ethereum \
 Creates new message call transaction or a contract creation for signed transactions.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1703,8 +1671,7 @@ the address to sign with must be unlocked.
 </aside>
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1762,8 +1729,7 @@ The eth_sendTransaction JSON-RPC method is not supported because Infura doesn't 
 Returns an object with data about the sync status or false.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1812,8 +1778,7 @@ curl https://api.web3.nucal.com/ethereum \
 Used for submitting a proof-of-work solution.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1870,8 +1835,7 @@ curl https://api.web3.nucal.com/ethereum \
 Polling method for a filter, which returns an array of logs which occurred since last poll.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -1951,8 +1915,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns an array of all logs matching filter with given id.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
@@ -2016,8 +1979,7 @@ curl https://api.web3.nucal.com/ethereum \
 Returns an array of all logs matching a given filter object.
 
 ```shell
-## JSON-RPC over HTTPS POST
-## You can also replace mainnet with a different supported network
+
 
 curl https://api.web3.nucal.com/ethereum \
     -X POST \
