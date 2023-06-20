@@ -431,16 +431,14 @@
 
 <p>Make sure to replace <code>&lt;your_wallet_address&gt;</code> with your wallet address.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://api.web3.nucal.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
+<div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://api.web3.nucal.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
 </code></pre></div>
-<p>Response will be like following:
-<code>shell
-{
-    &quot;nonce&quot;: 6156349486544681,
-    &quot;text&quot;: &quot;Please sign this message, to connect. (6156349486544681)&quot;
-}
-</code></p>
-
+<p>Response will be like following:</p>
+<div class="highlight"><pre class="highlight sh tab-shell"><code><span class="o">{</span>
+    <span class="s2">"nonce"</span>: 6156349486544681,
+    <span class="s2">"text"</span>: <span class="s2">"Please sign this message, to connect. (6156349486544681)"</span>
+<span class="o">}</span>
+</code></pre></div>
 <p>Sign the text in response with your wallet.</p>
 
 <blockquote>
@@ -454,16 +452,14 @@ Make sure to replace <code>&lt;signature&gt;</code> with the one you created wit
   "signature": "&lt;signature&gt;"
 }'</span>
 </code></pre></div>
-<p>Response:
-<code>
-{
-  &quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoidXNlciIsIndhbGxldEFkZHJlc3MiOiIweDBhNTQwZDI5ZDEzNjllMWM4OGVhOGMzYzkwOTI5NWE0ODA1Y2MyNDgiLCJ0aW1lIjoxNjg3MTY0MzE5ODYyLCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTY4OTc1NjMxOX0.BxfgDhWo-cr-dw2aCJyO0UPIgTQScQukMeX3J4s3tYA&quot;,
-  &quot;accessTokenExpiresAt&quot;: 1689756319,
-  &quot;refreshToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJ0aW1lIjoxNjg3MTY0MzE5ODY3LCJpYXQiOjE2ODcxNjQzMTksImV4cCI6MTcxODI2ODMxOX0.Tbl58Yxo3MvAOCzGBkTKIdz9sJ93VRfiankdnsr0boo&quot;,
-  &quot;refreshTokenExpiresAt&quot;: 1718268319
+<p>Response:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "accessToken": "&lt;your_access_token&gt;",
+  "accessTokenExpiresAt": &lt;access_token_expiration_time&gt;,
+  "refreshToken": "&lt;your_refresh_token&gt;",
+  "refreshTokenExpiresAt": &lt;refresh_token_expiration_time&gt;
 }
-</code></p>
-
+</code></pre></div>
 <p>Nucal uses token to allow access to the API. </p>
 
 <p>Nucal expects for the token to be included in all API requests to the server in a header that looks like the following:</p>
@@ -504,9 +500,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <!-- Returns the current "latest" block number. -->
 
 <p>Returns the number of most recent block.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -547,8 +541,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>QUANTITY - integer of the current block number the client is on.</code></p>
 <h2 id='eth_getbalance'>eth_getBalance</h2>
 <p>Returns the balance of the account of given address.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -584,9 +577,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>QUANTITY - integer of the current balance, measured in wei.</code></p>
 <h2 id='eth_call'>eth_call</h2>
 <p>Executes a new message call immediately without creating a transaction on the block chain.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -674,8 +665,7 @@ eth_call consumes `zero gas`, but this parameter may be needed by some execution
 <p><code>DATA - the return value of executed contract method.</code></p>
 <h2 id='eth_protocolversion'>eth_protocolVersion</h2>
 <p>Returns the current Ethereum protocol version.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -703,9 +693,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>String - The current Ethereum protocol version</code></p>
 <h2 id='eth_chainid'>eth_chainId</h2>
 <p>Returns the currently configured chain id, a value used in replay-protected transaction signing as introduced by EIP-155.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -737,9 +725,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 Method Limitations -- 
 To prevent abuse of the API, the gas parameter to eth_estimateGas and eth_call are capped at 10x (1000%) the current block gas limit. You can recreate this behavior in your local test environment (ganache, besu, geth, or other client) via the rpc.gascap command-line option.
 </aside>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -832,9 +818,7 @@ eth_estimateGas consumes `zero gas`, but this parameter may be needed by some ex
 <p><code>GAS USED - the amount of gas used.</code></p>
 <h2 id='eth_feehistory'>eth_feeHistory</h2>
 <p>Returns historical gas information, allowing you to track trends over time.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -921,9 +905,7 @@ blockCount -> If blocks in the specified block range are not available, then onl
 <p><code>reward - An array of effective priority fee per gas data points from a single block. All zeroes are returned if the block is empty.</code></p>
 <h2 id='eth_gasprice'>eth_gasPrice</h2>
 <p>Returns the current gas price in wei.(the current price per gas in wei)</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -950,9 +932,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>QUANTITY - integer of the current gas price in wei.</code></p>
 <h2 id='eth_getblockbyhash'>eth_getBlockByHash</h2>
 <p>Returns information about a block by hash.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -1065,9 +1045,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>uncles: Array - Array of uncle hashes.</code></p>
 <h2 id='eth_getblockbynumber'>eth_getBlockByNumber</h2>
 <p>Returns information about a block by block number.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -1172,9 +1150,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>uncles: Array - Array of uncle hashes.</code></p>
 <h2 id='eth_getblocktransactioncountbyhash'>eth_getBlockTransactionCountByHash</h2>
 <p>Returns the number of transactions in a block from a block matching the given block hash.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -1216,9 +1192,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>QUANTITY - integer of the number of transactions in this block.</code></p>
 <h2 id='eth_getblocktransactioncountbynumber'>eth_getBlockTransactionCountByNumber</h2>
 <p>Returns the number of transactions in a block matching the given block number.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -1260,9 +1234,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>QUANTITY - integer of the number of transactions in this block.</code></p>
 <h2 id='eth_getcode'>eth_getCode</h2>
 <p>Returns the compiled smart contract code, if any, at a given address.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
-
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -1308,8 +1280,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>CODE - a hex of the code at the given address</code></p>
 <h2 id='eth_getlogs'>eth_getLogs</h2>
 <p>Returns an array of all logs matching a given filter object.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1409,8 +1380,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>topics: Array of 0 to 4 32 Bytes of indexed log arguments. (In solidity: The first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)), except you declared the event with the anonymous specifier.)</code></p>
 <h2 id='eth_getproof'>eth_getProof</h2>
 <p>Returns the account and storage values of the specified account, including the Merkle proof.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1496,8 +1466,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>BALANCE - hexadecimal of the current balance in wei.</code></p>
 <h2 id='eth_gettransactionbyblockhashandindex'>eth_getTransactionByBlockHashAndIndex</h2>
 <p>Returns information about a transaction by block hash and transaction index position.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1577,8 +1546,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 </ul>
 <h2 id='eth_gettransactionbyblocknumberandindex'>eth_getTransactionByBlockNumberAndIndex</h2>
 <p>Returns information about a transaction by block number and transaction index position.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1640,8 +1608,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><strong>See</strong> <a href="#eth_getTransactionByBlockHashAndIndex">eth_getTransactionByBlockHashAndIndex</a></p>
 <h2 id='eth_gettransactionbyhash'>eth_getTransactionByHash</h2>
 <p>Returns the information about a transaction requested by transaction hash.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1715,8 +1682,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 </ul>
 <h2 id='eth_gettransactioncount'>eth_getTransactionCount</h2>
 <p>Returns the number of transactions sent from an address.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1767,8 +1733,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <aside class="notice">
 Note that the receipt is not available for pending transactions.
 </aside>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1858,8 +1823,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 </ul>
 <h2 id='eth_mining'>eth_mining</h2>
 <p>Returns true if client is actively mining new blocks.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1887,8 +1851,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>IS MINING FLAG - a boolean indicating if the client is mining</code></p>
 <h2 id='eth_hashrate'>eth_hashrate</h2>
 <p>Returns the number of hashes per second that the node is mining with. Only applicable when the node is mining.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1916,8 +1879,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>HASHRATE - a hex code of an integer representing the number of hashes per second.</code></p>
 <h2 id='eth_sendrawtransaction'>eth_sendRawTransaction</h2>
 <p>Creates new message call transaction or a contract creation for signed transactions.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -1970,8 +1932,7 @@ Use eth_getTransactionReceipt to get the contract address, after the transaction
 <aside class="notice">
 the address to sign with must be unlocked.
 </aside>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -2024,8 +1985,7 @@ The eth_sendTransaction JSON-RPC method is not supported because Infura doesn't 
 <p><strong>See</strong> <a href="#eth_sendRawTransaction">eth_sendRawTransaction</a></p>
 <h2 id='eth_syncing'>eth_syncing</h2>
 <p>Returns an object with data about the sync status or false.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -2060,8 +2020,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>SYNC BLOCKS i. startingBlock - a hexcode of the integer indicating the block at which the import started (will only be reset, after the sync reached his head) ii. currentBlock - a hexcode of the integer indicating the current block, same as eth_blockNumber iii. highestBlock - a hexcode of the integer indicating the highest block</code></p>
 <h2 id='eth_submitwork'>eth_submitWork</h2>
 <p>Used for submitting a proof-of-work solution.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -2118,8 +2077,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><code>Boolean - returns true if the provided solution is valid, otherwise false.</code></p>
 <h2 id='eth_getfilterchanges'>eth_getFilterChanges</h2>
 <p>Polling method for a filter, which returns an array of logs which occurred since last poll.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -2197,8 +2155,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p>## eth_getFilterLogs</p>
 
 <p>Returns an array of all logs matching filter with given id.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
@@ -2256,8 +2213,7 @@ curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
 <p><strong>See</strong> <a href="#eth_getFilterChanges">eth_getFilterChanges</a></p>
 <h2 id='eth_getlogs-2'>eth_getLogs</h2>
 <p>Returns an array of all logs matching a given filter object.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
-<span class="c">## You can also replace mainnet with a different supported network</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
 
 curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
