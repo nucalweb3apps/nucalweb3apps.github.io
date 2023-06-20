@@ -32,13 +32,13 @@ Welcome to the Nucal API! You can use our API to use Ethereum rpc's.
 
 > Make sure to replace `<your_wallet_address>` with your wallet address.
 
-```sh
+```shell
 curl -request GET "https://api.web3.nucal.com/auth/connect/wallet/<your_wallet_address>/nonce/"
 ```
 
 Response will be like following:
 
-```sh
+```shell
 {
     "nonce": 6156349486544681,
     "text": "Please sign this message, to connect. (6156349486544681)"
@@ -76,7 +76,7 @@ Nucal uses token to allow access to the API.
 
 Nucal expects for the token to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: Bearer <token<`
+`Authorization: Bearer <token>`
 
 <aside class="notice">
 You must replace <code>token</code> with your access token.

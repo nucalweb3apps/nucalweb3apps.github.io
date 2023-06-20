@@ -431,10 +431,10 @@
 
 <p>Make sure to replace <code>&lt;your_wallet_address&gt;</code> with your wallet address.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://api.web3.nucal.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://api.web3.nucal.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
 </code></pre></div>
 <p>Response will be like following:</p>
-<div class="highlight"><pre class="highlight sh tab-shell"><code><span class="o">{</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">{</span>
     <span class="s2">"nonce"</span>: 6156349486544681,
     <span class="s2">"text"</span>: <span class="s2">"Please sign this message, to connect. (6156349486544681)"</span>
 <span class="o">}</span>
@@ -464,7 +464,7 @@ Make sure to replace <code>&lt;signature&gt;</code> with the one you created wit
 
 <p>Nucal expects for the token to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: Bearer &lt;token&lt;</code></p>
+<p><code>Authorization: Bearer &lt;token&gt;</code></p>
 
 <aside class="notice">
 You must replace <code>token</code> with your access token.
