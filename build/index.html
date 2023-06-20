@@ -431,7 +431,7 @@
 
 <p>Make sure to replace <code>&lt;your_wallet_address&gt;</code> with your wallet address.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://public-gateway.ewr4.chain.nusec.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-request</span> GET <span class="s2">"https://api.web3.nucal.com/auth/connect/wallet/&lt;your_wallet_address&gt;/nonce/"</span>
 </code></pre></div>
 <p>Response will be like following:
 <code>shell
@@ -447,7 +447,7 @@
 <p>Make sure to replace <code>&lt;your_wallet_address&gt;</code> with your wallet address.
 Make sure to replace <code>&lt;signature&gt;</code> with the one you created with your wallet.</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="s1">'https://public-gateway.ewr4.chain.nusec.com/auth/connect/wallet/'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> POST <span class="s1">'https://api.web3.nucal.com/auth/connect/wallet/'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
   "walletAddress": "&lt;your_wallet_address&gt;",
@@ -476,7 +476,7 @@ You must replace <code>token</code> with your access token.
 <h1 id='ethereum'>Ethereum</h1><h2 id='eth_accounts'>eth_accounts</h2>
 <p>Returns a list of addresses owned by client.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -491,7 +491,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -507,7 +507,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -522,7 +522,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10307C9"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-2'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-2'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -550,7 +550,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -573,7 +573,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0234c8a3397aab58"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-3'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-3'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -587,7 +587,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -614,7 +614,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-4'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-4'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -677,7 +677,7 @@ eth_call consumes `zero gas`, but this parameter may be needed by some execution
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -692,7 +692,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-5'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-5'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -706,7 +706,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -721,7 +721,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-6'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-6'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -740,7 +740,7 @@ To prevent abuse of the API, the gas parameter to eth_estimateGas and eth_call a
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -768,7 +768,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x5cec"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-7'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-7'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -835,7 +835,7 @@ eth_estimateGas consumes `zero gas`, but this parameter may be needed by some ex
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -876,7 +876,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-8'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-8'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -924,7 +924,7 @@ blockCount -> If blocks in the specified block range are not available, then onl
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -939,7 +939,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1dfd13ffe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-9'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-9'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -953,7 +953,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -999,7 +999,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-10'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-10'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1068,7 +1068,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1109,7 +1109,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-11'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-11'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1175,7 +1175,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1195,7 +1195,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xb"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="mi">11</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-12'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-12'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1219,7 +1219,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1239,7 +1239,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xa"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-13'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-13'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1263,7 +1263,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1283,7 +1283,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x6001600080..."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-14'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-14'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1311,7 +1311,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1342,7 +1342,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-15'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-15'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1412,7 +1412,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1451,7 +1451,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-16'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-16'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1499,7 +1499,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1535,7 +1535,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-17'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-17'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1580,7 +1580,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1615,7 +1615,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-18'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-18'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1643,7 +1643,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1677,7 +1677,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
     </span><span class="nl">"s"</span><span class="p">:</span><span class="s2">"0x4ba69724e8f69de52f0125ad8b3c5c2cef33019bac3249e2c0a2192766d1721c"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-19'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-19'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1718,7 +1718,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1738,7 +1738,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1a"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-20'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-20'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1770,7 +1770,7 @@ Note that the receipt is not available for pending transactions.
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1819,7 +1819,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-21'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-21'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1861,7 +1861,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1876,7 +1876,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-22'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-22'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1890,7 +1890,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1905,7 +1905,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-23'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-23'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1919,7 +1919,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1939,7 +1939,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-24'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-24'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -1973,7 +1973,7 @@ the address to sign with must be unlocked.
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -1993,7 +1993,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-25'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-25'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -2027,7 +2027,7 @@ The eth_sendTransaction JSON-RPC method is not supported because Infura doesn't 
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -2047,7 +2047,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-26'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-26'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -2063,7 +2063,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -2087,7 +2087,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-27'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-27'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -2121,7 +2121,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -2154,7 +2154,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-28'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-28'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -2200,7 +2200,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -2233,7 +2233,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-29'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-29'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
@@ -2259,7 +2259,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">## JSON-RPC over HTTPS POST</span>
 <span class="c">## You can also replace mainnet with a different supported network</span>
 
-curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</span>
+curl https://api.web3.nucal.com/ethereum <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -2294,7 +2294,7 @@ curl https://public-gateway.ewr4.chain.nusec.com/ethereum <span class="se">\</sp
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='request-30'>Request</h3>
-<p><code>POST https://public-gateway.ewr4.chain.nusec.com/ethereum</code></p>
+<p><code>POST https://api.web3.nucal.com/ethereum</code></p>
 <h3 id='headers-30'>Headers</h3>
 <p><code>Content-Type: application/json</code></p>
 
