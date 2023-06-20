@@ -45,7 +45,6 @@ Response will be like following:
 }
 ```
 
-
 Sign the text in response with your wallet.
 
 
@@ -63,7 +62,7 @@ curl --request POST 'https://api.web3.nucal.com/auth/connect/wallet/' \
 
 Response:
 
-```
+```shell
 {
   "accessToken": "<your_access_token>",
   "accessTokenExpiresAt": <access_token_expiration_time>,
